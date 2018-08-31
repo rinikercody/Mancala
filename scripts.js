@@ -16,7 +16,7 @@ window.onload = function(){
   * Called if user clicks on either goal pit and displays a invalid move message
 */
 function pitClicked(){
-	document.getElementById('message').innerHTML = "You can't select a player's goal";
+	if(!gameOver) document.getElementById('message').innerHTML = "You can't select a player's goal";
 }
 
 /** @function setUp
@@ -33,6 +33,7 @@ function setUp(){
 	board[7] = 0; //This is player2's pit
 	
 	document.getElementById('message').innerHTML = "";
+	document.getElementById('message').style.color = "Black";
 	document.getElementById('reset-message').innerHTML = "";
 	
 	playersTurn = 1; //Player 1 goes first
@@ -60,7 +61,13 @@ function updateDisplay(){
 	
 	//Update turn in UI
 	var turnLabel = document.getElementById('turn-label');
-	if(playersTurn == 1){
+	
+	if(gameOver){
+		//Change turn label to say that the game is over.
+		document.getElementById('turn-label').innerHTML = "Game is Done!";
+		document.getElementById('turn-label').style.color = "Black";
+	}
+	else if(playersTurn == 1){
 		turnLabel.innerHTML = "Player 1's turn";
 		turnLabel.style.color = "Red";
 	}
@@ -71,8 +78,6 @@ function updateDisplay(){
 	else{ //For startup
 		str = "Mancala";
 	}
-	
-	
 	
 	//Clear out cups before updating
 	for(var i = 0; i < 14; i++){
