@@ -63,8 +63,7 @@ function updateDisplay(){
 	var turnLabel = document.getElementById('turn-label');
 	
 	if(gameOver){
-		//Change turn label to say that the game is over.
-		document.getElementById('turn-label').innerHTML = "Game is Done!";
+		//Reset text color to black when games ends.
 		document.getElementById('turn-label').style.color = "Black";
 	}
 	else if(playersTurn == 1){
@@ -182,6 +181,8 @@ function checkWin(){
 			board[i] = 0;
 		}
 		board[0] += winningAmount;
+		document.getElementById('turn-label').innerHTML = "Game is Done! Player1 gets the left over pebbles since Player2's side was empty.";
+		document.getElementById('turn-label').style.color = "Black";
 	}
 	
 	//Player 2 gets all the pebbles on their side of the board.
@@ -191,6 +192,8 @@ function checkWin(){
 			board[i] = 0;
 		}
 		board[7] += winningAmount;
+		document.getElementById('turn-label').innerHTML = "Game is Done! Player2 gets the left over pebbles since Player1's side was empty.";
+		document.getElementById('turn-label').style.color = "Black";
 	}
 	
 	if(check || check2){
